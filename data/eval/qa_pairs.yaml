@@ -1,0 +1,54 @@
+# Ground-truth Q&A pairs for evaluation.
+# Each answer is derived from explicit graph traversals (not guesses).
+
+- question: "How does the chip shortage at Factory A impact Acme Corp?"
+  expected_answer: >
+    The chip shortage at Factory A (TSMC Fab 18) halts production of the
+    NX-7 Microcontroller, which is used in the DriveECU-500 and the
+    ADAS-Platform X.  Both products are sold to Acme Corp, so Acme Corp
+    faces potential delays and supply disruptions for its flagship EV
+    powertrain ECU and its Level-3 autonomous driving module.
+  graph_path: "RiskEvent 'Chip Shortage at Factory A' -AFFECTS-> Factory A -PRODUCES-> NX-7 Microcontroller -USED_IN-> DriveECU-500 -SOLD_TO-> Acme Corp"
+  difficulty: flagship
+
+- question: "Which customers are affected by the earthquake in East Asia?"
+  expected_answer: >
+    The earthquake affects Factory A (TSMC) and Factory B (Samsung) in
+    East Asia.  Factory A produces the NX-7 Microcontroller (used in
+    DriveECU-500 and ADAS-Platform X), impacting Acme Corp, NovaDrive,
+    and Velocity Motors.  Factory B produces MemX-DDR5 and PixelDrive
+    Display IC, further impacting Velocity Motors and Acme Corp through
+    products like InCabin-360 and ADAS-Platform X.
+  difficulty: multi-hop
+
+- question: "What alternative suppliers exist for the NX-7 Microcontroller?"
+  expected_answer: >
+    The NX-7 Microcontroller has an alternative through Supplier Eta,
+    which can package compatible MCU dies from Factory F (Renesas Naka Fab)
+    as an emergency alternative.
+  difficulty: simple
+
+- question: "What is the impact of the rare-earth export ban on EV production?"
+  expected_answer: >
+    The rare-earth export ban cuts off Supplier Beta, which supplies
+    rare-earth substrates for the VPower-300 IGBT.  The IGBT is used in
+    the EV-Inverter Pro, which is sold to Velocity Motors and NovaDrive.
+    Both OEMs' EV inverter production lines would be impacted.
+  difficulty: multi-hop
+
+- question: "Which components does Acme Corp depend on?"
+  expected_answer: >
+    Acme Corp purchases the DriveECU-500 (needs NX-7 Microcontroller),
+    ADAS-Platform X (needs NX-7 Microcontroller, MemX-DDR5, SensorIQ
+    LiDAR ASIC), InCabin-360 (needs MemX-DDR5, PixelDrive Display IC,
+    AudioMax DSP), TeleMatics Hub (needs ConnectX-V2X Transceiver,
+    RF-5G Modem), and ClusterVision HUD (needs PixelDrive Display IC).
+  difficulty: traversal
+
+- question: "How does the cybersecurity breach at Supplier Epsilon affect TerraFleet?"
+  expected_answer: >
+    The breach halts PCB shipments from Supplier Epsilon, which supplies
+    HDI PCBs for the ConnectX-V2X Transceiver.  This transceiver is used
+    in the TeleMatics Hub, which is sold to TerraFleet.  TerraFleet's
+    fleet connectivity could be disrupted.
+  difficulty: multi-hop

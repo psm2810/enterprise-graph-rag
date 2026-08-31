@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version.local
+
+# Env / secrets
+.env
+
+# Neo4j local data
+neo4j_data/
+neo4j_logs/
+
+# Streamlit / caches
+.streamlit/secrets.toml
+.cache/
+
+# OS
+.DS_Store
