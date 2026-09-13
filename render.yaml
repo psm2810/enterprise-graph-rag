@@ -15,7 +15,7 @@ services:
       - key: EMBED_PROVIDER
         value: fastembed
       - key: GROQ_MODEL
-        value: llama-3.3-70b-versatile
+        value: llama-3.1-8b-instant
       - key: GROQ_EXTRACT_MODEL
         value: llama-3.1-8b-instant
       - key: FASTEMBED_MODEL

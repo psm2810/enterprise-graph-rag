@@ -25,7 +25,7 @@ class Settings:
 
     # Groq (used when LLM_PROVIDER=groq).
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
-    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
     # Embedding backend: "ollama" (nomic-embed-text) or "fastembed" (local ONNX,
     # used for cloud deploy where Ollama is unavailable).
