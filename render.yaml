@@ -1,0 +1,31 @@
+# Render deployment for the Groq + Neo4j Aura demo.
+# Neo4j itself is NOT hosted here — point NEO4J_URI at a Neo4j Aura Free instance.
+services:
+  - type: web
+    name: enterprise-graph-rag
+    runtime: python
+    plan: free
+    buildCommand: pip install .
+    startCommand: streamlit run app/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: LLM_PROVIDER
+        value: groq
+      - key: EMBED_PROVIDER
+        value: fastembed
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_EXTRACT_MODEL
+        value: llama-3.1-8b-instant
+      - key: FASTEMBED_MODEL
+        value: BAAI/bge-small-en-v1.5
+      # Secrets — set these in the Render dashboard (sync: false keeps them out of git).
+      - key: GROQ_API_KEY
+        sync: false
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USER
+        sync: false
+      - key: NEO4J_PASSWORD
+        sync: false

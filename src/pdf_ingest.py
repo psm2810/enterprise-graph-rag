@@ -19,10 +19,29 @@ from typing import Callable
 
 from llama_index.core import Document
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.llms.ollama import Ollama
 
 from config.settings import settings
 from src.schema import ENTITY_TYPES, RELATION_TYPES, VALID_TRIPLES, is_valid_triple
+
+
+def _build_extract_llm():
+    """Return a LlamaIndex LLM for extraction based on the configured provider."""
+    if settings.llm_provider == "groq":
+        from llama_index.llms.groq import Groq
+
+        return Groq(
+            model=settings.groq_extract_model,
+            api_key=settings.groq_api_key,
+            request_timeout=180.0,
+        )
+
+    from llama_index.llms.ollama import Ollama
+
+    return Ollama(
+        model=settings.extract_model,
+        base_url=settings.ollama_host,
+        request_timeout=180.0,
+    )
 
 
 class PdfTooLargeError(Exception):
@@ -162,11 +181,7 @@ def extract_triples(
     text = read_pdf_text(source)
     chunks = _chunk(text)
 
-    llm = Ollama(
-        model=settings.extract_model,
-        base_url=settings.ollama_host,
-        request_timeout=180.0,
-    )
+    llm = _build_extract_llm()
 
     seen: set[tuple[str, str, str]] = set()
     triples: list[dict] = []
