@@ -15,9 +15,9 @@ services:
       - key: EMBED_PROVIDER
         value: fastembed
       - key: GROQ_MODEL
-        value: llama-3.1-8b-instant
+        value: openai/gpt-oss-20b
       - key: GROQ_EXTRACT_MODEL
-        value: llama-3.1-8b-instant
+        value: openai/gpt-oss-20b
       - key: FASTEMBED_MODEL
         value: BAAI/bge-small-en-v1.5
       # Secrets — set these in the Render dashboard (sync: false keeps them out of git).

@@ -25,7 +25,7 @@ class Settings:
 
     # Groq (used when LLM_PROVIDER=groq).
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
-    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    groq_model: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
     # Embedding backend: "ollama" (nomic-embed-text) or "fastembed" (local ONNX,
     # used for cloud deploy where Ollama is unavailable).
@@ -44,7 +44,7 @@ class Settings:
     # a stronger model like llama3.1:8b just for ingestion if quality is low).
     extract_model: str = os.getenv("EXTRACT_MODEL", os.getenv("LLM_MODEL", "qwen2.5:3b-instruct"))
     # Groq model used for extraction (a faster/cheaper model is fine here).
-    groq_extract_model: str = os.getenv("GROQ_EXTRACT_MODEL", "llama-3.1-8b-instant")
+    groq_extract_model: str = os.getenv("GROQ_EXTRACT_MODEL", "openai/gpt-oss-20b")
 
 
 settings = Settings()
